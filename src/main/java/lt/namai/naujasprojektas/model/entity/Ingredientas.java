@@ -1,9 +1,7 @@
 package lt.namai.naujasprojektas.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Ingredientas {
@@ -14,14 +12,23 @@ public class Ingredientas {
     private int kalorijosPer100g;
     private double kaina;
 
+
+    @ManyToMany(mappedBy = "receptoIngredientai")
+    Set<Receptas> ingridientoReceptai;
+
+
+
+
+
     public Ingredientas() {
     }
 
-    public Ingredientas(long id, String pavadinimas, int kalorijosPer100g, double kaina) {
+    public Ingredientas(long id, String pavadinimas, int kalorijosPer100g, double kaina, Set<Receptas> ingridientoReceptai) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.kalorijosPer100g = kalorijosPer100g;
         this.kaina = kaina;
+        this.ingridientoReceptai = ingridientoReceptai;
     }
 
     public long getId() {
@@ -56,6 +63,14 @@ public class Ingredientas {
         this.kaina = kaina;
     }
 
+    public Set<Receptas> getIngridientoReceptai() {
+        return ingridientoReceptai;
+    }
+
+    public void setIngridientoReceptai(Set<Receptas> ingridientoReceptai) {
+        this.ingridientoReceptai = ingridientoReceptai;
+    }
+
     @Override
     public String toString() {
         return "Ingredientas{" +
@@ -63,6 +78,7 @@ public class Ingredientas {
                 ", pavadinimas='" + pavadinimas + '\'' +
                 ", kalorijosPer100g=" + kalorijosPer100g +
                 ", kaina=" + kaina +
+                ", ingridientoReceptai=" + ingridientoReceptai +
                 '}';
     }
 }
