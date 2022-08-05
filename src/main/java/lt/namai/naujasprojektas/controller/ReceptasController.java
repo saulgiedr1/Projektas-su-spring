@@ -18,8 +18,9 @@ public class ReceptasController {
     String testinisEndpoint() {
         return "šis puslapis veikia";
     }
-    @GetMapping("/recep/gauti_pav")
+    @GetMapping("/receptas/gauti_pav")
     Receptas gautiPagalPavadinima(@RequestParam String pavadinimas) {
         return receptasRepository.findByPavadinimas(pavadinimas);
     }
+
 }

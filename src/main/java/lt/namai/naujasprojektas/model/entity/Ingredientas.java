@@ -11,24 +11,24 @@ public class Ingredientas {
     private String pavadinimas;
     private int kalorijosPer100g;
     private double kaina;
-
-
-    @ManyToMany(mappedBy = "receptoIngredientai")
-    Set<Receptas> ingridientoReceptai;
-
-
-
+@ManyToMany
+        @JoinTable(
+                name ="sujungimas_receptas_ingredientas",
+                joinColumns = @JoinColumn(name = "ingredientas_id"),
+                inverseJoinColumns = @JoinColumn(name = "receptas_id")
+        )
+Set<Receptas> receptaiKuriuseYtaSitasIngredientas;
 
 
     public Ingredientas() {
     }
 
-    public Ingredientas(long id, String pavadinimas, int kalorijosPer100g, double kaina, Set<Receptas> ingridientoReceptai) {
+    public Ingredientas(long id, String pavadinimas, int kalorijosPer100g, double kaina, Set<Receptas> receptaiKuriuseYtaSitasIngredientas) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.kalorijosPer100g = kalorijosPer100g;
         this.kaina = kaina;
-        this.ingridientoReceptai = ingridientoReceptai;
+        this.receptaiKuriuseYtaSitasIngredientas = receptaiKuriuseYtaSitasIngredientas;
     }
 
     public long getId() {
@@ -63,12 +63,12 @@ public class Ingredientas {
         this.kaina = kaina;
     }
 
-    public Set<Receptas> getIngridientoReceptai() {
-        return ingridientoReceptai;
+    public Set<Receptas> getReceptaiKuriuseYtaSitasIngredientas() {
+        return receptaiKuriuseYtaSitasIngredientas;
     }
 
-    public void setIngridientoReceptai(Set<Receptas> ingridientoReceptai) {
-        this.ingridientoReceptai = ingridientoReceptai;
+    public void setReceptaiKuriuseYtaSitasIngredientas(Set<Receptas> receptaiKuriuseYtaSitasIngredientas) {
+        this.receptaiKuriuseYtaSitasIngredientas = receptaiKuriuseYtaSitasIngredientas;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Ingredientas {
                 ", pavadinimas='" + pavadinimas + '\'' +
                 ", kalorijosPer100g=" + kalorijosPer100g +
                 ", kaina=" + kaina +
-                ", ingridientoReceptai=" + ingridientoReceptai +
+                ", receptaiKuriuseYtaSitasIngredientas=" + receptaiKuriuseYtaSitasIngredientas +
                 '}';
     }
 }
